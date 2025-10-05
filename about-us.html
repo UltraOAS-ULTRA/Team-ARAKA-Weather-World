@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Team ARAKA - About Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet"/>
+  <link rel="icon" type="image/webp" href="favicon.webp">
+  <style>
+    body {
+      font-family: 'Fira Sans', sans-serif;
+      margin: 0;
+      color: white;
+      background-color: #000000;
+    }
+
+    @keyframes banner_slideDown {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .welcome-bar-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 45px;
+      background-color: #0b3d91;
+      z-index: 2;
+    }
+
+    .welcome-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      /* background-color: #e7f434; */
+      background-color: #fc3d21;
+      color: white;
+      font-weight: normal;
+      font-size: 16px;
+      padding: 15px 0;
+      box-sizing: border-box;
+      z-index: 3;
+      font-family: 'Fira Sans', sans-serif;
+      display: flex;
+      align-items: center;
+      padding-left: 120px;
+      text-align: left;
+
+      animation-name: banner_slideDown;
+      animation-duration: 1.5s;
+      animation-fill-mode: forwards;
+      animation-timing-function: ease-out;
+    }
+
+    .topbar {
+      position: fixed;
+      top: 45px;
+      left: 0;
+      width: 100%;
+      background-color: #0b3d91;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 120px;
+      box-sizing: border-box;
+      z-index: 4;
+    }
+
+    .logo-container {
+      margin-left: 30px;
+    }
+
+    .nav-container {
+      margin-right: 30px;
+      position: relative;
+    }
+
+    .logo {
+      max-width: 220px;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 20px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #0062ff;
+      color: white;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      width: 30px;
+      height: 22px;
+      justify-content: space-between;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 4px;
+      background-color: white;
+      border-radius: 2px;
+    }
+
+    .dropdown-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      right: 0;
+      top: 50px;
+      background-color: #0b3d91;
+      border-radius: 6px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      overflow: hidden;
+      min-width: 160px;
+      z-index: 5;
+    }
+
+    .dropdown-menu a {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 18px;
+      color: white;
+    }
+
+    .dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #0062ff;
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        padding: 20px 40px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+        margin-right: 30px;
+      }
+    }
+
+    .dropdown-menu.show {
+      display: flex;
+    }
+
+    .options {
+      padding-top: 20px;
+      position: fixed;
+      top: 210px; /* below topbar */
+      left: 0;
+      right: 0;
+      background: linear-gradient(to bottom, #0b3d91 5%, black 20%);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 columns */
+      grid-template-rows: repeat(3, auto);  /* 3 rows */
+      gap: 20px;
+      padding: 20px 40px;
+      box-sizing: border-box;
+      z-index: 1;
+      height: auto; /* let height grow with content */
+      align-self: start;
+      justify-content: stretch; /* each div fills cell horizontally */
+    }
+
+    .bio {
+      border: 4px solid white;
+      padding: 0px 10px;
+      border-radius: 10px;
+      background-color: #511209;
+      transition: background-color 0.3s ease;
+    }
+
+    .bio:hover {
+      background-color: #fc3d21;
+    }
+    
+    .bio2 {
+      border: 4px solid white;
+      padding: 0px 10px;
+      border-radius: 10px;
+      background-color: #051a3f;
+      transition: background-color 0.3s ease;
+    }
+
+    .bio2:hover {
+      background-color: #0b3d91;
+    }
+    
+    .spacer {
+      height: 100px;
+      grid-column: 1 / -1; /* make it span both columns */
+    }
+  </style>
+</head>
+<body>
+  <div class="welcome-bar-bg"></div>
+  <div class="welcome-bar">
+    Welcome to Team ARAKA's 2025 NASA Space Apps "Will it Rain on My Parade?" Submission!
+  </div>
+  <div class="topbar">
+    <div class="logo-container">
+      <img class="logo" src="spaceAppsLogo.png" alt="Team ARAKA Logo" />
+    </div>
+    <div class="nav-container">
+      <nav aria-label="Primary" id="nav-links">
+        <a href="file:///Users/ahsanahsan/Desktop/SpaceAppsWebsite/index.html">Home</a>
+        <a href="file:///Users/ahsanahsan/Desktop/SpaceAppsWebsite/about-us.html">About Us</a>
+      </nav>
+      <div class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" role="button" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="dropdown-menu" id="dropdown-menu" aria-label="Dropdown menu">
+        <a href="file:///Users/ahsanahsan/Desktop/SpaceAppsWebsite/index.html">Home</a>
+        <a href="file:///Users/ahsanahsan/Desktop/SpaceAppsWebsite/about-us.html">About Us</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="options">
+    <div class="spacer"></div>
+    <div class="bio">
+      <h2>Ahsan A.</h2>
+      <p>I have been coding for 8 years, and I know a total of 5 coding languages, but I mainly do web development & Python, and I have been part of 3 coding challenges in the past two years, like the NASA App Development Challenge and the American Computer Science League (ACSL). I also do debate (PDP & Parliamentary) and Vex IQ robotics (first time winner). My role in this project was the front end, making the website and designing our assets.</p>
+    </div>
+    <div class="bio2">
+      <h2>Rohan C.</h2>
+      <p>I have been coding for 6-7 years and I mainly code in Python. In my free time I like to hang with my friends, play cricket, and design and draw cities. My role in this team was the back-end Python.</p>
+    </div>
+    <div class="bio2">
+      <h2>Alvin S.</h2>
+      <p>I have been coding for 4 years, and I know Python and some Swift. I like solving challenges made by hacker rank. I have been part of 3 coding challenges in the past 2 years. I am also part of Vex Robotics. Me and my friends won first place in Robotics. My role in this team was the back-end Python.</p>
+    </div>
+    <div class="bio">
+      <h2>Kyle C.</h2>
+      <p>I create games using Unity (4+ years) and mainly code in C#. I also like to play video games, cook, play pickleball, debate (PDP and Parliamentary), and hike. I am also a first time Vex IQ tournament robotics winner. My role in this team was the Unity project.</p>
+    </div>
+    <div class="bio">
+      <h2>Ayman M.</h2>
+      <p>I am a student at Folsom High School and Folsom Lake College (Dual Enrollment). Some language I know are Python, HTML, CSS, Javascript, and a little bit of Interact. I love a good challenge and am exploring a career in Computer Science. I was a part of First Tech Challenge Team Yantra 2 years back. My </p>
+    </div>
+    <div class="bio2"><h2>Team ARAKA</h2></div>
+  </div>
+
+  <script>
+    
+    // Dropdown Menu (in case of less wide dimensions)
+    const hamburger = document.getElementById('hamburger');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+
+    hamburger.addEventListener('click', () => {
+      const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', !isExpanded);
+      dropdownMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        hamburger.setAttribute('aria-expanded', false);
+        dropdownMenu.classList.remove('show');
+      }
+    });
+
+    hamburger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        hamburger.click();
+      }
+    });
+  </script>
+</body>
+</html>

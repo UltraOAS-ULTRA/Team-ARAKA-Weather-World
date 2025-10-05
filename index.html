@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Team ARAKA - NASA Space Apps 2025 Submission</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet"/>
+  <link rel="icon" type="image/webp" href="favicon.webp">
+  <style>
+    body {
+      font-family: 'Fira Sans', sans-serif;
+      margin: 0;
+      color: white;
+      background-color: #fff;
+    }
+
+    @keyframes banner_slideDown {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .welcome-bar-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 45px;
+      background-color: #0b3d91;
+      z-index: 2;
+    }
+
+    .welcome-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      /* background-color: #e7f434; */
+      background-color: #fc3d21;
+      color: white;
+      font-weight: normal;
+      font-size: 16px;
+      padding: 15px 0;
+      box-sizing: border-box;
+      z-index: 3;
+      font-family: 'Fira Sans', sans-serif;
+      display: flex;
+      align-items: center;
+      padding-left: 120px;
+      text-align: left;
+
+      animation-name: banner_slideDown;
+      animation-duration: 1.5s;
+      animation-fill-mode: forwards;
+      animation-timing-function: ease-out;
+    }
+
+    .topbar {
+      position: fixed;
+      top: 45px;
+      left: 0;
+      width: 100%;
+      background-color: #0b3d91;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 120px;
+      box-sizing: border-box;
+      z-index: 4;
+    }
+
+    .logo-container {
+      margin-left: 30px;
+    }
+
+    .nav-container {
+      margin-right: 30px;
+      position: relative;
+    }
+
+    .logo {
+      max-width: 220px;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 20px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #0062ff;
+      color: white;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      width: 30px;
+      height: 22px;
+      justify-content: space-between;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 4px;
+      background-color: white;
+      border-radius: 2px;
+    }
+
+    .dropdown-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      right: 0;
+      top: 50px;
+      background-color: #1b2b85;
+      border-radius: 6px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      overflow: hidden;
+      min-width: 160px;
+      z-index: 5;
+    }
+
+    .dropdown-menu a {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 18px;
+      color: white;
+    }
+
+    .dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #0062ff;
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        padding: 20px 40px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+        margin-right: 30px;
+      }
+    }
+
+    .dropdown-menu.show {
+      display: flex;
+    }
+
+    /* NEW SECTION */
+
+    .content-wrapper {
+      margin-top: 160px; /* reduced since title-bar removed */
+      background-color: white;
+      min-height: 400px;
+      padding: 40px;
+      box-sizing: border-box;
+      color: black;
+      font-family: 'Fira Sans', sans-serif;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Removed .title-bar */
+
+    .options {
+      position: fixed;
+      top: 210px; /* below topbar */
+      left: 0;
+      right: 0;
+      background: linear-gradient(to bottom, #0b3d91 5%, black 20%);
+      display: flex;
+      justify-content: flex-start;
+      gap: 20px;
+      padding: 0 40px;
+      box-sizing: border-box;
+      z-index: 1; /* make sure it’s above other content */
+      height: 100px;
+      align-items: flex-end;
+    }
+
+    .options button {
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 12px 12px 0 0;
+      padding: 20px 24px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      height: 60px;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+    }
+
+    .options button:hover {
+      background-color: #333;
+    }
+
+    .options button.active {
+      background-color: white;
+      color: black;
+    }
+
+
+    /* White content box flush below buttons */
+    .content-box {
+      background-color: white;
+      color: black;
+      font-family: 'Fira Sans', sans-serif;
+      margin-top: 140px;
+    }
+
+    .content-description {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .subjects {
+      background-color: #0057e7;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    .subjects:hover {
+      background-color: #85b4ff;
+      cursor: default;
+    }
+
+    .difficulty {
+      background-color: #ff5a00;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    .difficulty:hover {
+      background-color: #ffac7f;
+      cursor: default;
+    }
+
+    .content-footer {
+      font-size: 12px;
+      color: #818181;
+    }
+
+        /* HERO SECTION */
+    .hero {
+      background: var(--brand-gradient);
+      color: #fff;
+      text-align: center;
+      padding: 24px 12px;
+    }
+    .hero h1 { margin: 0; font-size: clamp(22px, 3.8vw, 44px); text-shadow: 1px 1px 4px rgba(0,0,0,0.3); }
+    .hero p { margin-top: 8px; font-weight: 500; }
+
+    /* SLIDESHOW */
+    .slideshow { position: relative; max-width: 1200px; margin: 10px auto 20px; border-radius: 10px; overflow: hidden; max-height: 400px; }
+    .slide { display: none;}
+    .slide img { width: 100%; display: block; }
+
+    .arrow {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 16px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 24px;
+      user-select: none;
+      background: rgba(11, 61, 145, 0.5);
+      border-radius: 8px;
+    }
+    .arrow:hover { background: rgba(252, 61, 33, 0.7); }
+    .arrow.left { left: 8px; }
+    .arrow.right { right: 8px; }
+
+    /* GRID LAYOUT */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 12px; border-radius: 10px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    @media (max-width: 900px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+
+    .card { background: #fff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 16px; }
+    .section-title { margin: 0 0 10px; font-size: clamp(18px, 2.6vw, 26px); }
+
+    /* CALENDAR */
+    .cal-wrap { max-width: 100%; }
+    .cal-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .cal-title { text-align: center; font-size: 18px; margin: 8px 0; flex: 1; }
+    .cal-btn { padding: 8px 10px; border: 1px solid #dddddd; border-radius: 8px; background: #000000; cursor: pointer; }
+    .cal-btn:hover { background: #929292; }
+    .cal-clock { color: var(--muted); font-size: 14px; text-align: center; margin: 4px 0 12px; }
+    .calendar { border: 1px solid #e5e5e5; border-radius: 12px; overflow: hidden; }
+    .calendar .monthbar { background: var(--brand-gradient); color: #fff; padding: 12px; text-align: center; }
+    .calendar .weekdays, .calendar .days { display: grid; grid-template-columns: repeat(7, 1fr); }
+    .calendar .weekdays div { background: #f3f4f6; padding: 10px 0; text-align: center; font-weight: 600; font-size: 14px; }
+    .calendar .days div { padding: 14px 0; text-align: center; border-top: 1px solid #f0f0f0; min-height: 44px; }
+    .calendar .days .muted { color: #c0c4cc; }
+    .calendar .days .today {
+      background: #e7f8f4;
+      outline: 2px solid var(--brand-red);
+      outline-offset: -2px;
+      border-radius: 6px;
+    }
+    .cal-legend { font-size: 12px; color: var(--muted); margin-top: 8px; text-align: center; }
+
+    /* DEMO */
+    .stack { display: grid; gap: 16px; }
+    .demo iframe { width: 100%; display: block; height: 360px; }
+
+    /* BUTTONS */
+    button {
+      background: var(--brand-blue);
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover { background: var(--brand-red); color: #fff; }
+
+    footer { margin: 28px 0 40px; text-align: center; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="welcome-bar-bg"></div>
+  <div class="welcome-bar">
+    Welcome to Team ARAKA's 2025 NASA Space Apps "Will it Rain on My Parade?" Submission!
+  </div>
+  <div class="topbar">
+    <div class="logo-container">
+      <img class="logo" src="spaceAppsLogo.png" alt="Team ARAKA Logo" />
+    </div>
+    <div class="nav-container">
+      <nav aria-label="Primary" id="nav-links">
+        <a href="file:///Users/ahsanahsan/Desktop/SpaceAppsWebsite/index.html">Home</a>
+        <a href="file:///Users/ahsanahsan/Desktop/SpaceAppsWebsite/about-us.html">About Us</a>
+      </nav>
+      <div class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" role="button" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="dropdown-menu" id="dropdown-menu" aria-label="Dropdown menu">
+        <a href="file:///Users/ahsanahsan/Desktop/SpaceAppsWebsite/index.html">Home</a>
+        <a href="file:///Users/ahsanahsan/Desktop/SpaceAppsWebsite/about-us.html">About Us</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="options" role="tablist" aria-label="Project Sections">
+      <button id="btn-details" class="option-btn active" role="tab" aria-selected="true" aria-controls="tab-details" tabindex="0">Event Details</button>
+      <button id="btn-project" class="option-btn" role="tab" aria-selected="false" aria-controls="tab-project" tabindex="-1">Our Project</button>
+      <button id="btn-process" class="option-btn" role="tab" aria-selected="false" aria-controls="tab-process" tabindex="-1">Process & Presentation</button>
+    </div>
+
+    <div class="content-wrapper">
+      <section id="tab-details" role="tabpanel" aria-labelledby="btn-details">
+        <div class="content-box">
+          <div style="display: flex; align-items: flex-start; gap: 40px;">
+            <!-- Event -->
+            <div>
+              <p style="font-weight: bold; margin: 0;">Event</p>
+              <p style="font-size: 22px; margin: 4px 0 0 0;">Will it Rain<br>on my Parade?</p>
+            </div>
+
+            <div style="width: 1px; height: 60px; background-color: #c1c4ca;"></div>
+
+            <!-- Difficulty -->
+            <div>
+              <p style="font-weight: bold; margin: 0;">Difficulty</p>
+              <div style="height: 11px;"></div>
+              <span class="difficulty">Intermediate</span>
+            </div>
+
+            <div style="width: 1px; height: 60px; background-color: #c1c4ca;"></div>
+
+            <!-- Subjects -->
+            <div>
+              <p style="font-weight: bold; margin: 0;">Subjects</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;">
+                <span class="subjects">Coding</span>
+                <span class="subjects">Data Analysis</span>
+                <span class="subjects">Data Visualization</span>
+                <span class="subjects">Forecasting</span>
+                <span class="subjects">Software</span>
+                <span class="subjects">Weather</span>
+                <span class="subjects">Web Development</span>
+              </div>
+            </div>
+
+          </div>
+          <br>
+
+          <h2>Challenge Summary</h2>
+          <p class="content-description">If you’re planning an outdoor event—like a vacation, a hike on a trail, or fishing on a lake—it would be good to know the chances of adverse weather for the time and location you are considering. There are many types of Earth observation data that can provide information on weather conditions for a particular location and day of the year. Your challenge is to construct an app with a personalized interface that enables users to conduct a customized query to tell them the likelihood of “very hot,” “very cold,” “very windy,” “very wet,” or “very uncomfortable” conditions for the location and time they specify. More info can be found at the <a href="https://www.spaceappschallenge.org/2025/challenges/will-it-rain-on-my-parade/?tab=details" target="_blank">official NASA Space Apps website</a>.</p>
+          <p class="content-footer">All text above is credited and copied from the official NASA Space Apps website.</p>
+
+          <br>
+
+          <h2>Our Task</h2>
+          <p class="content-description">Our task is to essentially create an app that allows people to see how their weather conditions are going to be at a given time in a given location. What we used to accomplish this is Unity for the actual data reader, Python for the back-end data interpretation and usage, and Website development languages (HTML, CSS, JS) to make the interface to use the app and get more details, like the details you are getting right now.</p>
+
+          <br>
+
+          <h2>Why this Task?</h2>
+          <p class="content-description">Weather impacts everyone on a daily basis, and having a tool that provides accurate updates about weather in any situation can be extremely valuable. This made the idea both relevant and interesting to us. We chose this task because we felt there was a lot of potential for a weather tracking app, and we felt that our specialized skills of website development, Python, and Unity fit this task well. In our opinions, our skills lie at about the Intermediate level in terms of coding and this matched that level.</p>
+        </div>
+      </section>
+
+      <section id="tab-project" role="tabpanel" aria-labelledby="btn-project" hidden>
+        <div class="content-box">
+          <h1 style="text-align: center;">Weather World by Team ARAKA</h1>
+          <p class="content-description" style="text-align: center;">Explore and view the different places around the worlds' weather, and easily figure out what outdoor activities would be perfect at any given time!</p>
+
+          <iframe 
+            src="https://kche6888github.github.io/Will-It-Rain-On-My-Parade-Test-V2-Fix/" 
+            width="100%"
+            height="600px"
+            style="border:none;"
+            title="Will It Rain On My Parade"
+          ></iframe>
+        </div>
+      </section>
+
+      <section id="tab-process" role="tabpanel" aria-labelledby="btn-process" hidden>
+        <div class="content-box">
+
+            <section class="slideshow">
+              <div class="slide"><img src="picture1.png" alt="NASA Building, affected by weather"></div>
+              <div class="slide"><img src="https://picsum.photos/id/1062/1600/640" alt="Clouds"></div>
+              <div class="slide"><img src="https://picsum.photos/id/1003/1600/640" alt="Light rain"></div>
+              <div class="slide"><img src="https://picsum.photos/id/1031/1600/640" alt="Heavy rain"></div>
+              <div class="arrow left" onclick="plusSlides(-1)">❮</div>
+              <div class="arrow right" onclick="plusSlides(1)">❯</div>
+            </section>
+
+            <main class="container">
+              <iframe
+              src="https://docs.google.com/presentation/d/e/2PACX-1vQKePq6ESiA4ynp_OBHVXlFk6Al8KZXa7mea8NoRW86Bf1slTX4gf6o7fko-7XY0Eu4IDiFcMZVdsqR/pubembed?start=false&loop=false&delayms=3000"
+              frameborder="0"
+              width="1179.26470588"
+              height="698.960018383"
+              allowfullscreen="true"
+              mozallowfullscreen="true"
+              webkitallowfullscreen="true"
+              style="display: block; margin-left: auto; margin-right: auto; border-radius: 10px;"
+              ></iframe>
+
+              <br>
+
+              <section class="two-col">
+                <article class="card" id="about">
+                  <h2 class="section-title">What we Used</h2>
+                  <p>
+                    We used ____ to ____
+                  </p>
+                </article>
+
+                <div class="stack">
+                  <aside class="card" id="calendar">
+                    <h2 class="section-title">Current Date</h2>
+                    <div class="cal-wrap">
+                      <div class="cal-top">
+                        <button class="cal-btn" id="calPrev" aria-label="Previous month">◀</button>
+                        <div class="cal-title" id="calTitle"></div>
+                        <button class="cal-btn" id="calNext" aria-label="Next month">▶</button>
+                      </div>
+                      <div class="cal-clock" id="calClock"></div>
+                      <div class="calendar">
+                        <div class="monthbar" id="calMonthbar">Month YYYY</div>
+                        <div class="weekdays" id="calWeekdays">
+                          <div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div><div>Su</div>
+                        </div>
+                        <div class="days" id="calDays"></div>
+                      </div>
+                      <div class="cal-legend">Today is highlighted. Press the arrows to change the month.</div>
+                    </div>
+                  </aside>
+                </div>
+              </section>
+            </main>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll('.option-btn');
+    const tabs = {
+      'btn-details': document.getElementById('tab-details'),
+      'btn-project': document.getElementById('tab-project'),
+      'btn-process': document.getElementById('tab-process'),
+    };
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        buttons.forEach(btn => {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+          btn.setAttribute('tabindex', '-1');
+        });
+        Object.values(tabs).forEach(tab => tab.hidden = true);
+
+        button.classList.add('active');
+        button.setAttribute('aria-selected', 'true');
+        button.setAttribute('tabindex', '0');
+        tabs[button.id].hidden = false;
+        button.focus();
+      });
+    });
+
+    // Dropdown Menu (in case of less wide dimensions)
+    const hamburger = document.getElementById('hamburger');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+
+    hamburger.addEventListener('click', () => {
+      const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', !isExpanded);
+      dropdownMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        hamburger.setAttribute('aria-expanded', false);
+        dropdownMenu.classList.remove('show');
+      }
+    });
+
+    hamburger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        hamburger.click();
+      }
+    });
+    
+    // Iframe
+    function openFullscreen() {
+      const elem = document.getElementById('prototype');
+      if (elem.requestFullscreen) elem.requestFullscreen();
+      else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+      else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+    }
+
+    // Slideshow
+    let index = 1;
+    function show(n) {
+      const slides = document.getElementsByClassName('slide');
+      if (!slides.length) return;
+      if (n > slides.length) index = 1;
+      if (n < 1) index = slides.length;
+      for (let i = 0; i < slides.length; i++) slides[i].style.display = 'none';
+      slides[index - 1].style.display = 'block';
+    }
+    function plusSlides(n) { show(index += n); }
+    setInterval(() => plusSlides(1), 5000);
+    show(index);
+
+    // Calendar
+    const WEEK_START = 1;
+    const calClock = document.getElementById('calClock');
+    function tickCalClock(){ calClock.textContent = new Date().toString(); }
+    tickCalClock(); setInterval(tickCalClock, 1000);
+    const calMonthbar = document.getElementById('calMonthbar');
+    const calTitleEl = document.getElementById('calTitle');
+    const calDaysEl = document.getElementById('calDays');
+    const calToday = new Date();
+    let calViewYear = calToday.getFullYear();
+    let calViewMonth = calToday.getMonth();
+
+    document.getElementById('calPrev').onclick = () => calChangeMonth(-1);
+    document.getElementById('calNext').onclick = () => calChangeMonth(1);
+
+    function calChangeMonth(delta){
+      calViewMonth += delta;
+      if (calViewMonth < 0){ calViewMonth = 11; calViewYear--; }
+      if (calViewMonth > 11){ calViewMonth = 0; calViewYear++; }
+      calRender(); sizeDemoToCalendar();
+    }
+
+    function calMonthName(m){
+      return new Intl.DateTimeFormat(undefined, { month: 'long' }).format(new Date(2000, m, 1));
+    }
+
+    function calRender(){
+      const label = `${calMonthName(calViewMonth)} ${calViewYear}`;
+      calMonthbar.textContent = label;
+      calTitleEl.textContent = label;
+      calDaysEl.innerHTML = '';
+      const firstOfMonth = new Date(calViewYear, calViewMonth, 1);
+      const startDay = (firstOfMonth.getDay() - WEEK_START + 7) % 7;
+      const daysInMonth = new Date(calViewYear, calViewMonth + 1, 0).getDate();
+      const totalCells = Math.ceil((startDay + daysInMonth) / 7) * 7;
+      const prevMonthDays = new Date(calViewYear, calViewMonth, 0).getDate();
+
+      for (let i = 0; i < totalCells; i++){
+        const cell = document.createElement('div');
+        const dayNum = i - startDay + 1;
+        if (i < startDay){
+          cell.textContent = prevMonthDays - (startDay - 1 - i);
+          cell.className = 'muted';
+        } else if (dayNum > daysInMonth){
+          cell.textContent = dayNum - daysInMonth;
+          cell.className = 'muted';
+        } else {
+          cell.textContent = dayNum;
+          if (calViewYear === calToday.getFullYear() &&
+              calViewMonth === calToday.getMonth() &&
+              dayNum === calToday.getDate()){
+            cell.classList.add('today');
+          }
+        }
+        calDaysEl.appendChild(cell);
+      }
+    }
+    calRender();
+
+    // Match demo height to calendar
+    function sizeDemoToCalendar(){
+      const calCard = document.getElementById('calendar');
+      const demoCard = document.getElementById('demoCard');
+      const iframe = document.getElementById('prototype');
+      if (!calCard || !demoCard || !iframe) return;
+
+      const calH = calCard.getBoundingClientRect().height;
+      const titleH = demoCard.querySelector('.section-title').getBoundingClientRect().height;
+      const btnH = demoCard.querySelector('div[style*="text-align:right"]').getBoundingClientRect().height;
+      const padY = parseFloat(getComputedStyle(demoCard).paddingTop) + parseFloat(getComputedStyle(demoCard).paddingBottom);
+      const target = Math.max(280, calH - (titleH + btnH + padY + 16));
+      iframe.style.height = `${Math.round(target)}px`;
+    }
+
+    window.addEventListener('load', sizeDemoToCalendar);
+    window.addEventListener('resize', sizeDemoToCalendar);
+  </script>
+</body>
+</html>
